@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace CRUD_API_SQL.Controllers
@@ -89,6 +90,50 @@ namespace CRUD_API_SQL.Controllers
 
         }
 
-    
+        [HttpPut]
+        public string UpdateStudentDetails(Student student) {
+            SqlConnection con = new SqlConnection(_configuration.GetConnectionString("CRUDSQL").ToString());
+            con.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from Student",con);
+            con.Close() ;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                int a = int.Parse(dr[0].ToString());
+                if (student.id == a)
+                {
+                    con.Open() ;
+                    SqlCommand cmd = new SqlCommand("Update Student Set Name='"+student.Name+"',FatherName='"+student.FatherName+"', BirthYear='"+student.BirthYear+"', Class='"+student.Class+"' where id='"+student.id+"'", con);
+                   
+                    int i = cmd.ExecuteNonQuery();
+                    con.Close();
+                    if (i > 0) {
+                        return "Data Updated Successfully";
+                    }
+                    else 
+                        return "Error Occurs or Not Found";
+                }
+      
+            }
+
+            return "Data Not Found";
+        }
+
+        [HttpDelete("{id}")]
+
+        public string DeleteByIdFromStudent(int id) {
+
+            SqlConnection con = new SqlConnection(_configuration.GetConnectionString("CRUDSQL").ToString());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Delete from student where ID='"+id+"'", con);
+            int i = cmd.ExecuteNonQuery();
+            if (i > 0)
+            {
+                return "Data Has Been Deleted";
+            }
+            return "No Data Present for this id Number";
+        }     
+            
     }
 }

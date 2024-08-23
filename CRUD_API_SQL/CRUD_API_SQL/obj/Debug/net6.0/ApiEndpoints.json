@@ -47,9 +47,61 @@
   },
   {
     "ContainingType": "CRUD_API_SQL.Controllers.CRUDController",
+    "Method": "UpdateStudentDetails",
+    "RelativePath": "api/CRUD",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "student",
+        "Type": "CRUD_API_SQL.Models.Student",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CRUD_API_SQL.Controllers.CRUDController",
     "Method": "GetStudentDetailsById",
     "RelativePath": "api/CRUD/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CRUD_API_SQL.Controllers.CRUDController",
+    "Method": "DeleteByIdFromStudent",
+    "RelativePath": "api/CRUD/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
